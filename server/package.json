@@ -20,6 +20,7 @@
     "#constant/*": "./src/constant/*.js",
     "#model/*": "./src/model/*.js",
     "#controller/*": "./src/controller/*.js",
-    "#routes/*": "./src/routes/*.js"
+    "#routes/*": "./src/routes/*.js",
+    "#middleware/*": "./src/middleware/*.js"
   }
 }
