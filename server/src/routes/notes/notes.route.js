@@ -6,7 +6,8 @@ import {
   createNote,
   updateNote,
   deleteNote,
-} from "#controllers/notes/notes.controller";
+} from "#controller/notes/notes.controller";
+
 const { FETCH_NOTES, FETCH_NOTE_BY_ID, CREATE_NOTE, UPDATE_NOTE, DELETE_NOTE } =
   apiRoutes;
 
