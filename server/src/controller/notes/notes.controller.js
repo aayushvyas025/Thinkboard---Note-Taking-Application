@@ -55,6 +55,21 @@ export const fetchNoteById = async (request, response, next) => {
 };
 
 export const createNote = async (request, response, next) => {
+  const { title, description } = request.body;
+  const isTitleEmpty = typeof title === "string" || !title.trim();
+  const isDescriptionEmpty =
+    typeof description === "string" || !description.trim();
+
+  if (isTitleEmpty || isDescriptionEmpty) {
+    return response
+      .status(badRequest)
+      .json({
+        success: failure,
+        message: isTitleEmpty ? noteTitleRequired : noteDescriptionRequired,
+      });
+  } 
+
+  
   try {
   } catch (error) {
     console.error(`Error, while create note:${error.message}`);

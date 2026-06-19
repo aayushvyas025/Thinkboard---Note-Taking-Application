@@ -23,6 +23,7 @@
     "#model/*": "./src/model/*.js",
     "#controller/*": "./src/controller/*.js",
     "#routes/*": "./src/routes/*.js",
-    "#middleware/*": "./src/middleware/*.js"
+    "#middleware/*": "./src/middleware/*.js",
+    "#config/*":"./src/config/*.js"
   }
 }

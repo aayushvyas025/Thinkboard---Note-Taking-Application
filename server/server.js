@@ -3,6 +3,7 @@ import envVariables from "#constant/envs.constant";
 import apiRoutes from "#constant/routes.constant";
 import notesRoutes from "#routes/notes/notes.route";
 import setupErrorMiddleware from "#middleware/error/error.middleware";
+import databaseConnection from "#config/database/database.config";
 
 const { backendPort } = envVariables;
 const { BASE } = apiRoutes;
@@ -14,6 +15,12 @@ app.use(BASE, notesRoutes);
 
 setupErrorMiddleware(app);
 
-app.listen(backendPort, () => {
-  console.log(`Your server is running on http://localhost:${backendPort}`);
-});
+databaseConnection()
+  .then(() => {
+    app.listen(backendPort, () => {
+      console.log(`Your server is running on http://localhost:${backendPort}`);
+    });
+  })
+  .catch((error) => {
+    console.error(`Error while connecting to the database: ${error.message}`);
+  });
