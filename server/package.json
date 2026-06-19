@@ -17,6 +17,9 @@
     "nodemon": "^3.1.14"
   },
   "imports": {
-    "#constant/*": "./src/constant/*.js"
+    "#constant/*": "./src/constant/*.js",
+    "#model/*": "./src/model/*.js",
+    "#controller/*": "./src/controller/*.js",
+    "#routes/*": "./src/routes/*.js"
   }
 }

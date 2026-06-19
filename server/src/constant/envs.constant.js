@@ -5,3 +5,4 @@ const envVariables = Object.freeze({
 });
 
 export default envVariables;
+
