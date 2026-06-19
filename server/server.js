@@ -1,9 +1,9 @@
-import express from "express"; 
+import express from "express";
+import envVariables from "#constant/envs.constant";
 
-const {} = envVariables 
-const app = express(); 
+const { backendPort } = envVariables;
+const app = express();
 
-
-app.listen(4001, () => {
-    console.log(`Your server is running on http://localhost:${4001}`)
-})
+app.listen(backendPort, () => {
+  console.log(`Your server is running on http://localhost:${backendPort}`);
+});
