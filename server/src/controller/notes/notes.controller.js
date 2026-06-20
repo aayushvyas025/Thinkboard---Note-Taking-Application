@@ -114,6 +114,12 @@ export const updateNote = async (request, response, next) => {
       title,
       description,
     });
+
+    if (!updateNote) {
+      return response
+        .status(notFound)
+        .json({ success: failure, message: noteNotFound });
+    }
     return response
       .status(ok)
       .json({ success: success, message: notesUpdated, updateNote });
