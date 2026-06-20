@@ -10,8 +10,9 @@ const {
   notesFetched,
   noNotesFound,
   noteByIdFetched,
-  notesCreate,
+  notesCreated,
   notesUpdated,
+  noteDeleted,
 } = serverResponses.successResponses;
 const { noteTitleRequired, noteDescriptionRequired } =
   serverResponses.errorResponses;
@@ -109,7 +110,10 @@ export const updateNote = async (request, response, next) => {
     });
   }
   try {
-    const updatedNote = await Note.findByIdAndUpdate(id, {title, description});
+    const updatedNote = await Note.findByIdAndUpdate(id, {
+      title,
+      description,
+    });
     return response
       .status(ok)
       .json({ success: success, message: notesUpdated, updateNote });
@@ -120,7 +124,18 @@ export const updateNote = async (request, response, next) => {
 };
 
 export const deleteNote = async (request, response, next) => {
+  const { id } = request.params;
+  const isValidId = validateId(id);
+
+  if (!isValidId.success) {
+    return response
+      .status(badRequest)
+      .json({ success: failure, message: invalidNoteId });
+  }
   try {
+    await Note.findByIdAndDelete(id);
+
+    return response.status(ok).json({ success: success, message: noteDeleted });
   } catch (error) {
     console.error(`Error, while delete note:${error.message}`);
     next(error);
