@@ -5,7 +5,7 @@ const { failure } = serverResponses.apiStateFlags;
 const { internalServerError } = serverResponses.commonResponses;
 
 function setupErrorMiddleware(app) {
-  app.use((error, request, response) => {
+  app.use((error, request, response, next) => {
     response.status(serverError).json({
       success: failure,
       message: internalServerError,
