@@ -1,6 +1,7 @@
 import Note from "#model/notes/notes.model";
 import mongoose from "mongoose";
 import serverResponses from "#constant/responses.constant";
+import { validateId, validateParams } from "#validation/params.validation";
 
 const { badRequest, notFound, created, ok } = serverResponses.statusCodes;
 const { success, failure } = serverResponses.apiStateFlags;
@@ -29,9 +30,9 @@ export const fetchNotes = async (request, response, next) => {
 export const fetchNoteById = async (request, response, next) => {
   const { id } = request.params;
 
-  const isValidId = mongoose.Types.ObjectId.isValid(id);
+  const isValidId = validateId(id);
 
-  if (!isValidId) {
+  if (!isValidId.success) {
     return response
       .status(badRequest)
       .json({ success: failure, message: invalidNoteId });
@@ -56,20 +57,18 @@ export const fetchNoteById = async (request, response, next) => {
 
 export const createNote = async (request, response, next) => {
   const { title, description } = request.body;
-  const isTitleEmpty = typeof title === "string" || !title.trim();
-  const isDescriptionEmpty =
-    typeof description === "string" || !description.trim();
+  const isValidParams = validateParams({ title, description });
 
-  if (isTitleEmpty || isDescriptionEmpty) {
-    return response
-      .status(badRequest)
-      .json({
-        success: failure,
-        message: isTitleEmpty ? noteTitleRequired : noteDescriptionRequired,
-      });
-  } 
+  if (!isValidParams.success) {
+    return response.status(badRequest).json({
+      success: failure,
+      message:
+        isValidParams.field === "title"
+          ? noteTitleRequired
+          : noteDescriptionRequired,
+    });
+  }
 
-  
   try {
   } catch (error) {
     console.error(`Error, while create note:${error.message}`);

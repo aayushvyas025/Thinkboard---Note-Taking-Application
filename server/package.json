@@ -24,6 +24,7 @@
     "#controller/*": "./src/controller/*.js",
     "#routes/*": "./src/routes/*.js",
     "#middleware/*": "./src/middleware/*.js",
-    "#config/*":"./src/config/*.js"
+    "#config/*":"./src/config/*.js",
+    "#validation/*":"./src/validation/*.js"
   }
 }
