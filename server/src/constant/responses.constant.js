@@ -5,6 +5,7 @@ const serverResponses = Object.freeze({
     created: 201,
     badRequest: 400,
     notFound: 404,
+    manyRequest: 429,
   },
   apiStateFlags: {
     success: true,
@@ -26,7 +27,6 @@ const serverResponses = Object.freeze({
   errorResponses: {
     noteTitleRequired: "Error, note title is required",
     noteDescriptionRequired: "Error, note description is required",
-    
   },
 });
 
