@@ -27,6 +27,7 @@ const serverResponses = Object.freeze({
   errorResponses: {
     noteTitleRequired: "Error, note title is required",
     noteDescriptionRequired: "Error, note description is required",
+    rateLimitingError:'Error, to many request. try again later'
   },
 });
 

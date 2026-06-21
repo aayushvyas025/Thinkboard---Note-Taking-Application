@@ -12,7 +12,7 @@ function rateLimitingConfig() {
 
   const rateLimit = new Ratelimit({
     redis: redisConfig,
-    limiter: Ratelimit.slidingWindow(10, "20"),
+    limiter: Ratelimit.slidingWindow(50, "60 s"),
   });
 
   return rateLimit;
