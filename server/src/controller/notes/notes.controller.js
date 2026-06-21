@@ -17,14 +17,13 @@ const {
 const { noteTitleRequired, noteDescriptionRequired } =
   serverResponses.errorResponses;
 
-export const fetchNotes = async (request, response, next) => {
+export const fetchNotes = async (_, response, next) => {
   try {
-    const notes = await Note.find();
+    const notes = await Note.find().sort({ createdAt: -1 });
 
     return response.status(ok).json({
       success: success,
-      message:
-        notes.length > 0 ? "Notes fetched successfully" : "No notes found",
+      message: notes.length > 0 ? notesFetched : noNotesFound,
       notes,
     });
   } catch (error) {
